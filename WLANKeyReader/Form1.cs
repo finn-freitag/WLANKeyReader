@@ -93,7 +93,7 @@ namespace WLANKeyReader
         {
             if(e.Data != null)
             {
-                if (e.Data.Contains("Schl\u0081sselinhalt"))
+                if (e.Data.Contains("Schl\u0081sselinhalt") || e.Data.Contains("Key Content"))
                 {
                     string password = e.Data.Split(':')[1].Substring(1);
                     Dictionary<string, string> newAccess = new Dictionary<string, string>();
@@ -116,10 +116,15 @@ namespace WLANKeyReader
         {
             if(e.Data != null)
             {
-                if (e.Data.Contains("Profil f\u0081r alle Benutzer : "))
+                try
                 {
                     wlanAccess.Add(e.Data.Split(new string[] { " : " }, StringSplitOptions.None)[1], "");
                 }
+                catch { }
+                /*if (e.Data.Contains("Profil f\u0081r alle Benutzer : ") || e.Data.Contains("User profiles"))
+                {
+                    
+                }*/
             }
         }
 
